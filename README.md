@@ -3,6 +3,7 @@
 ## Members
 Yiru Sun 015262897 yiru.sun@sjsu.edu<br/>
 Huiying Li 012289069 huiying.li@sjsu.edu
+Xichao Wei 015324764 xichao.wei@sjsu.edu
 
 ## Dataset
 MovieLens 20M Dataset<br/>
