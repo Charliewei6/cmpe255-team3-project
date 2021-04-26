@@ -13,4 +13,12 @@ https://www.kaggle.com/grouplens/movielens-20m-dataset/download
 Our group aims at doing research for using deep learning method to make a recommender system by traing MovieLens datasets. Each of our team members focus on digging into a particular deep learning recommender system from Kaggle, optimizing it, testing it, and comparing the new result to the original one.
 
 ## Methods
-### Method 1 (Yiru Sun)
+### Method 1: Building Recommender System using Implicit Feedback (Yiru Sun)
+Artical: Recommender System Deep Learning<br/>
+Link: https://www.kaggle.com/taruntiwarihp/recommender-system-deep-learning/notebook<br/>
+Description: This method treats users’ rating as an interaction to the movie. The recommendation system transfers the dataset to an implicit feedback dataset. Then, it recommends movies to a customer based on his own rating habits.<br/>
+Pros: This method is customized to each user.<br/>
+Cons: This method is dependent on the user's interaction with the movie, but not the rating value of the movie. This means the recommendation system will recommend similar movies to a user, because the user will more likely to give a rating feedback to these movies, no matter the rating value will be high or low.<br/>
+Steps: #1 
+Test method: Hit Ratio @ 10, leave one out
+
