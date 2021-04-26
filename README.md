@@ -48,8 +48,10 @@ Our group aims at doing research for using deep learning method to make a recomm
 
 *Results*
 1. Original The Hit Ratio @ 10 is: 0.86
-2. Optimization 1 The Hit Ratio @ 10 is: 0.25
-3. Optimization 2 The Hit Ratio @ 10 is: 0.12
+2. Optimization 1 0.75 0 The Hit Ratio @ 10 is: 0.25
+3. Optimization 2 0.5 2 The Hit Ratio @ 10 is: 0.12
+4. Optimization 3 0.25 0 The Hit Ratio @ 10 is:
+5. Optimization 4 0.25 4 The Hit Ratio @ 10 is:
 
 *Time*
 * Total test time:
