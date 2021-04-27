@@ -63,7 +63,7 @@ class MovieLensTrainDataset(Dataset):
         elif algorithm == 2:
             user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
             user_rating_set = ratings[['userId', 'rating']]
-            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.75]).unstack().reset_index()
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.85]).unstack().reset_index()
             rating_q = {}
             for i in range(len(user_rating)):
                 rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
@@ -77,8 +77,9 @@ class MovieLensTrainDataset(Dataset):
         elif algorithm == 3:
             user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
             user_rating_set = ratings[['userId', 'rating']]
-            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.5]).unstack().reset_index()
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.25]).unstack().reset_index()
             rating_q = {}
+            num_negatives = 3
             for i in range(len(user_rating)):
                 rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
             for u, i, r in user_item_set:
@@ -88,8 +89,6 @@ class MovieLensTrainDataset(Dataset):
                     labels.append(1)
                 else:
                     labels.append(0)
-            num_negatives = 2
-            for u, i, r in user_item_set:
                 for _ in range(num_negatives):
                     negative_item = np.random.choice(all_movieIds)
                     while (u, negative_item, r) in user_item_set:
