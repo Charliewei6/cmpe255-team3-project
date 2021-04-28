@@ -56,11 +56,34 @@ Our group aims at doing research for using deep learning method to make a recomm
 * Total test time:
 
 
-### Method 2: 
+### Method 2: Building Recommender System using Matrix Factorizaiton with or without Neural Network
+*Artical:* 
+* CF Based RecSys by Low Rank Matrix Factorization
+* Creating a Hybrid Content-Collaborative Movie Recommender Using Deep Learning
 
+*Link:* 
+* https://www.kaggle.com/rajmehra03/cf-based-recsys-by-low-rank-matrix-factorization#Collaborative-Filtering-Based-Recommender-Systems-using-Low-Rank-Matrix-Factorization(User-&-Movie-Embeddings)-&-Neural-Network-in-Keras.
+* https://towardsdatascience.com/creating-a-hybrid-content-collaborative-movie-recommender-using-deep-learning-cc8b431618af
 
+*Description:* 
+* This method use maxtrix factorization method to break down the rating matirx to user embedding and movie emdedding. And then use densely-connect NN layer to train the model.
 
-### Method 3:
+*Steps:* 
+1. load data
+2. split training and testing data. training data is 0.8, testing data is 0.2
+3. Create embedding for user and movie, add densely-connected NN layer to the model if using Neural Network.
+4. Train the model with traning data set.
+5. Predic the rating using the model.
+6. Calculate rmse.
+7. Compare rmse between model without densely-connected NN layer and model with densely-connected NN layer.
+
+*Results*
+1. Implement train and predict method
+2. Set Paramters:n_latent_factors=50, batch_size = 128, epochs = 20. Neural Network RMSE=0.82, Normal RMSE=1.3.
+
+*Next Step*
+1. Turning parameters as we are using 30% data. At this time, we only use 10% data.
+2. Create hybrid recommender using Content based recommender and CF recommender based on the method mentioned in the second artical.
 
 
 
