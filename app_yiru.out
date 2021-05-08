@@ -1,0 +1,109 @@
+(project) [nandembp:~/yuri_sjsu/cmpe255/project] susu2142% python app.py 
+Method1:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 46764/46764 [12:59<00:00, 59.99it/s, loss=0.203]
+The Hit Ratio @ 10 is 0.86
+Method2:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 35073/35073 [09:30<00:00, 61.46it/s, loss=0.277]
+The Hit Ratio @ 10 is 0.80
+Method3:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 46764/46764 [12:11<00:00, 63.95it/s, loss=0.235]
+The Hit Ratio @ 10 is 0.85
+Method4:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 58455/58455 [15:44<00:00, 61.87it/s, loss=0.206]
+The Hit Ratio @ 10 is 0.85
+Method5:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 70146/70146 [18:36<00:00, 62.82it/s, loss=0.182]
+The Hit Ratio @ 10 is 0.85
+Method6:
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+
+  | Name           | Type      | Params
+---------------------------------------------
+0 | user_embedding | Embedding | 1.1 M 
+1 | item_embedding | Embedding | 1.1 M 
+2 | fc1            | Linear    | 1.1 K 
+3 | fc2            | Linear    | 2.1 K 
+4 | output         | Linear    | 33    
+---------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.645     Total estimated model params size (MB)
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 81837/81837 [21:53<00:00, 62.31it/s, loss=0.173]
+The Hit Ratio @ 10 is 0.86
