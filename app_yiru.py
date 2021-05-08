@@ -48,7 +48,7 @@ class MovieLensTrainDataset(Dataset):
         users, items, labels = [], [], []
         if algorithm == 1:
             user_item_set = set(zip(ratings['userId'], ratings['movieId']))
-            num_negatives = 4
+            num_negatives = 3
             for u, i in user_item_set:
                 users.append(u)
                 items.append(i)
@@ -60,11 +60,13 @@ class MovieLensTrainDataset(Dataset):
                     users.append(u)
                     items.append(negative_item)
                     labels.append(0)
+        # Algorithm 2 is the first test with number of negatives as 2 and quantile 0.5
         elif algorithm == 2:
             user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
             user_rating_set = ratings[['userId', 'rating']]
-            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.85]).unstack().reset_index()
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.5]).unstack().reset_index()
             rating_q = {}
+            num_negatives = 2
             for i in range(len(user_rating)):
                 rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
             for u, i, r in user_item_set:
@@ -74,12 +76,89 @@ class MovieLensTrainDataset(Dataset):
                     labels.append(1)
                 else:
                     labels.append(0)
+                for _ in range(num_negatives):
+                    negative_item = np.random.choice(all_movieIds)
+                    while (u, negative_item, r) in user_item_set:
+                        negative_item = np.random.choice(all_movieIds)
+                    users.append(u)
+                    items.append(negative_item)
+                    labels.append(0)
+        # Algorithm 3 is the first test with number of negatives as 3 and quantile 0.25
         elif algorithm == 3:
             user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
             user_rating_set = ratings[['userId', 'rating']]
             user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.25]).unstack().reset_index()
             rating_q = {}
             num_negatives = 3
+            for i in range(len(user_rating)):
+                rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
+            for u, i, r in user_item_set:
+                users.append(u)
+                items.append(i)
+                if r >= rating_q[u]:
+                    labels.append(1)
+                else:
+                    labels.append(0)
+                for _ in range(num_negatives):
+                    negative_item = np.random.choice(all_movieIds)
+                    while (u, negative_item, r) in user_item_set:
+                        negative_item = np.random.choice(all_movieIds)
+                    users.append(u)
+                    items.append(negative_item)
+                    labels.append(0)
+        # Algorithm 4 is the first test with number of negatives as 4 and quantile 0.25
+        elif algorithm == 4:
+            user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
+            user_rating_set = ratings[['userId', 'rating']]
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.25]).unstack().reset_index()
+            rating_q = {}
+            num_negatives = 4
+            for i in range(len(user_rating)):
+                rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
+            for u, i, r in user_item_set:
+                users.append(u)
+                items.append(i)
+                if r >= rating_q[u]:
+                    labels.append(1)
+                else:
+                    labels.append(0)
+                for _ in range(num_negatives):
+                    negative_item = np.random.choice(all_movieIds)
+                    while (u, negative_item, r) in user_item_set:
+                        negative_item = np.random.choice(all_movieIds)
+                    users.append(u)
+                    items.append(negative_item)
+                    labels.append(0)
+        # Algorithm 5 is the first test with number of negatives as 5 and quantile 0.25
+        elif algorithm == 5:
+            user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
+            user_rating_set = ratings[['userId', 'rating']]
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.25]).unstack().reset_index()
+            rating_q = {}
+            num_negatives = 5
+            for i in range(len(user_rating)):
+                rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
+            for u, i, r in user_item_set:
+                users.append(u)
+                items.append(i)
+                if r >= rating_q[u]:
+                    labels.append(1)
+                else:
+                    labels.append(0)
+                for _ in range(num_negatives):
+                    negative_item = np.random.choice(all_movieIds)
+                    while (u, negative_item, r) in user_item_set:
+                        negative_item = np.random.choice(all_movieIds)
+                    users.append(u)
+                    items.append(negative_item)
+                    labels.append(0)
+        # Algorithm 6 is the first test with number of negatives as 6 and quantile 0.1
+        elif algorithm == 6:
+            user_item_set = set(zip(ratings['userId'], ratings['movieId'], ratings['rating']))
+            user_rating_set = ratings[['userId', 'rating']]
+            user_rating = user_rating_set.groupby('userId')['rating'].quantile([0.1]).unstack().reset_index()
+            rating_q = {}
+            num_negatives = 6
             for i in range(len(user_rating)):
                 rating_q[user_rating.iloc[i][0]] = user_rating.iloc[i][1]
             for u, i, r in user_item_set:
@@ -199,6 +278,27 @@ if __name__ == "__main__":
 
     print("Method3:")
     model = NCF(num_users, num_items, train_ratings, all_movieIds, algorithm=3)
+    trainer = pl.Trainer(max_epochs=5, gpus=None, reload_dataloaders_every_epoch=True,
+                     progress_bar_refresh_rate=50, logger=False, checkpoint_callback=False)
+    trainer.fit(model)
+    testing(ratings, test_ratings, all_movieIds, model)
+
+    print("Method4:")
+    model = NCF(num_users, num_items, train_ratings, all_movieIds, algorithm=4)
+    trainer = pl.Trainer(max_epochs=5, gpus=None, reload_dataloaders_every_epoch=True,
+                     progress_bar_refresh_rate=50, logger=False, checkpoint_callback=False)
+    trainer.fit(model)
+    testing(ratings, test_ratings, all_movieIds, model)
+
+    print("Method5:")
+    model = NCF(num_users, num_items, train_ratings, all_movieIds, algorithm=5)
+    trainer = pl.Trainer(max_epochs=5, gpus=None, reload_dataloaders_every_epoch=True,
+                     progress_bar_refresh_rate=50, logger=False, checkpoint_callback=False)
+    trainer.fit(model)
+    testing(ratings, test_ratings, all_movieIds, model)
+
+    print("Method6:")
+    model = NCF(num_users, num_items, train_ratings, all_movieIds, algorithm=6)
     trainer = pl.Trainer(max_epochs=5, gpus=None, reload_dataloaders_every_epoch=True,
                      progress_bar_refresh_rate=50, logger=False, checkpoint_callback=False)
     trainer.fit(model)
