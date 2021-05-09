@@ -48,7 +48,7 @@ class MovieLensTrainDataset(Dataset):
         users, items, labels = [], [], []
         if algorithm == 1:
             user_item_set = set(zip(ratings['userId'], ratings['movieId']))
-            num_negatives = 3
+            num_negatives = 4
             for u, i in user_item_set:
                 users.append(u)
                 items.append(i)
