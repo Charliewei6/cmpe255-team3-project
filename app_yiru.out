@@ -15,8 +15,8 @@ TPU available: False, using: 0 TPU cores
 0         Non-trainable params
 2.2 M     Total params
 8.645     Total estimated model params size (MB)
-Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 46764/46764 [12:59<00:00, 59.99it/s, loss=0.203]
-The Hit Ratio @ 10 is 0.86
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 58455/58455 [15:22<00:00, 63.34it/s, loss=0.176]
+The Hit Ratio @ 10 is 0.82
 Method2:
 GPU available: False, used: False
 TPU available: False, using: 0 TPU cores
