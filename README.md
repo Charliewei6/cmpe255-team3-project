@@ -81,12 +81,22 @@ Our group aims at doing research for using deep learning method to make a recomm
 7. Compare rmse between model without densely-connected NN layer and model with densely-connected NN layer.
 
 *Results*
-1. Implement train and predict method
-2. Set Paramters:n_latent_factors=50, batch_size = 128, epochs = 20. Neural Network RMSE=0.82, Normal RMSE=1.3.
+1. Turning parameters with 30% data
 
-*Next Step*
-1. Turning parameters as we are using 30% data. At this time, we only use 10% data.
-2. Create hybrid recommender using Content based recommender and CF recommender based on the method mentioned in the second artical.
+| Number | Batch_size  | Epochs | RMSE |  Runtime | output.log
+|--------|-------------|--------|------|----------|--|
+|1|32|5|-|More than 4 hours||
+|2|128|5|0.8376757057764654|02:12:45|[output_2.log]
+|3|512|10|0.8173020977949738|01:15:39|[output_3.log]
+|4|128|10|0.8146115762344519|02:45:02|[output_4.log]
+
+2. All data
+
+ Batch_size  | Epochs | RMSE |  Runtime | output.log
+-------------|--------|------|----------|--|
+512|10|||
+
+3. Hybrid Recommender System
 
 
 
