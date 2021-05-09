@@ -94,7 +94,7 @@ Our group aims at doing research for using deep learning method to make a recomm
 
  Batch_size  | Epochs | RMSE |  Runtime | output.log
 -------------|--------|------|----------|--|
-512|10|||
+512|10|0.9760667964050797|07:13:56|[output_5.log]
 
 3. Hybrid Recommender System
 
