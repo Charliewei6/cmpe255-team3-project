@@ -48,9 +48,12 @@ Our group aims at doing research for using deep learning method to make a recomm
 * In this method, If a user's rating value is above his own 50% quantile value, the label is set to 1. Otherwise, it is 0. Besides, similiar to the original method from the artical, I randamly generate 2 negetive samples for eachrow of data, to make sure the ratio of negative to positive samples is 4:1
 
 *Results*
-1. Original 0 4 The Hit Ratio @ 10 is: 0.71
-2. Optimization 1 0 5 The Hit Ratio @ 10 is: 0.90
-3. Optimization 2 0.25 3 The Hit Ratio @ 10 is: 0.84
+1. Original 0 4 The Hit Ratio @ 10 is: 0.82
+2. Optimization 1 0.5 2 The Hit Ratio @ 10 is: 0.80
+3. Optimization 2 0.25 3 The Hit Ratio @ 10 is: 0.85
+4. Optimization 2 0.25 4 The Hit Ratio @ 10 is: 0.85
+5. Optimization 2 0.25 5 The Hit Ratio @ 10 is: 0.85
+6. Optimization 2 0.1 6 The Hit Ratio @ 10 is: 0.86
 
 *Time*
 * Total test time:
