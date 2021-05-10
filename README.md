@@ -59,7 +59,7 @@ Our group aims at doing research for using deep learning method to make a recomm
 * Total test time:
 
 
-### Method 2: Building Recommender System using Matrix Factorizaiton with or without Neural Network
+### Method 2: Building Recommender System using Matrix Factorizaiton with Neural Network
 *Artical:* 
 * [CF Based RecSys by Low Rank Matrix Factorization](https://www.kaggle.com/rajmehra03/cf-based-recsys-by-low-rank-matrix-factorization#Collaborative-Filtering-Based-Recommender-Systems-using-Low-Rank-Matrix-Factorization(User-&-Movie-Embeddings)-&-Neural-Network-in-Keras.)
 * [Creating a Hybrid Content-Collaborative Movie Recommender Using Deep Learning](https://towardsdatascience.com/creating-a-hybrid-content-collaborative-movie-recommender-using-deep-learning-cc8b431618af)
