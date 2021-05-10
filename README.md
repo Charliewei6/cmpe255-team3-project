@@ -61,12 +61,10 @@ Our group aims at doing research for using deep learning method to make a recomm
 
 ### Method 2: Building Recommender System using Matrix Factorizaiton with or without Neural Network
 *Artical:* 
-* CF Based RecSys by Low Rank Matrix Factorization
-* Creating a Hybrid Content-Collaborative Movie Recommender Using Deep Learning
+* [CF Based RecSys by Low Rank Matrix Factorization](https://www.kaggle.com/rajmehra03/cf-based-recsys-by-low-rank-matrix-factorization#Collaborative-Filtering-Based-Recommender-Systems-using-Low-Rank-Matrix-Factorization(User-&-Movie-Embeddings)-&-Neural-Network-in-Keras.)
+* [Creating a Hybrid Content-Collaborative Movie Recommender Using Deep Learning](https://towardsdatascience.com/creating-a-hybrid-content-collaborative-movie-recommender-using-deep-learning-cc8b431618af)
+* [Simple Collaberative Recommendation using LightFM](https://www.kaggle.com/panks03/simple-collaberative-recommendation-using-lightfm)
 
-*Link:* 
-* https://www.kaggle.com/rajmehra03/cf-based-recsys-by-low-rank-matrix-factorization#Collaborative-Filtering-Based-Recommender-Systems-using-Low-Rank-Matrix-Factorization(User-&-Movie-Embeddings)-&-Neural-Network-in-Keras.
-* https://towardsdatascience.com/creating-a-hybrid-content-collaborative-movie-recommender-using-deep-learning-cc8b431618af
 
 *Description:* 
 * This method use maxtrix factorization method to break down the rating matirx to user embedding and movie emdedding. And then use densely-connect NN layer to train the model.
@@ -78,10 +76,22 @@ Our group aims at doing research for using deep learning method to make a recomm
 4. Train the model with traning data set.
 5. Predic the rating using the model.
 6. Calculate rmse.
-7. Compare rmse between model without densely-connected NN layer and model with densely-connected NN layer.
 
-*Results*
-1. Turning parameters with 30% data
+*Problem:*
+* Collaborative filtering has cold start problem.
+
+*Solution:*
+* Create hybrid recommender system with content-based filtering to Collaborative filtering
+
+*To Do List:*
+1. Collaborative filtering: turning parameters with 30% data, metric is RMSE.
+2. Collaborative filtering: use the best parameter set from step1 to train the model, and then test the model with the whole dataset.
+3. Create hybrid recommender system
+4. Hybrid recommender system: turning parameters
+5. Compare collaborative filtering and hybrid recommender system
+
+*Experiemnts*
+1. Collaborative filtering: turning parameters with 30% data
 
 | Number | Batch_size  | Epochs | RMSE |  Runtime | output.log
 |--------|-------------|--------|------|----------|--|
@@ -90,13 +100,34 @@ Our group aims at doing research for using deep learning method to make a recomm
 |3|512|10|0.8173020977949738|01:15:39|[output_3.log]
 |4|128|10|0.8146115762344519|02:45:02|[output_4.log]
 
-2. All data
+2. Collaborative filtering: all data
 
  Batch_size  | Epochs | RMSE |  Runtime | output.log
 -------------|--------|------|----------|--|
 512|10|0.9760667964050797|07:13:56|[output_5.log]
 
-3. Hybrid Recommender System
+3. Hybrid Recommender System: all data
+
+ Batch_size  | Epochs | Num of movies | Percentage of CB | Percentage of CF | RMSE |  Runtime | output.log
+-------------|--------|------|----------|--|--|--|--|
+(Base Line)512|10|-|-|-
+512|10|2|5%|95%
+512|10|2|10%|90%
+512|10|2|20%|80%
+512|10|5|5%|95%
+512|10|5|10%|90%
+512|10|5|20%|80%
+512|10|10|5%|95%
+512|10|10|10%|90%
+512|10|10|20%|80%
 
 
+### How to run program in local?
+* python fileName
+
+### How to run program using HPC?
+* Upload necessary files to HPC, in our case, upload movie.csv, rating.csv, all python file, submit script([submit_hybrid.sh]())
+* In submit script, change job-name, output, error, time, load module, and file path if necessary.
+* run: sbatch submit.sh
+* Use output file to retrive result.
 
