@@ -126,7 +126,7 @@ Our group aims at doing research for using deep learning method to make a recomm
 * python fileName
 
 ### How to run program using HPC?
-* Upload necessary files to HPC, in our case, upload movie.csv, rating.csv, all python file, submit script([submit_hybrid.sh]())
+* Upload necessary files to HPC, in our case, upload movie.csv, rating.csv, all python file, submit script([submit_hybrid.sh](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/submit_hybrid.sh))
 * In submit script, change job-name, output, error, time, load module, and file path if necessary.
 * run: sbatch submit.sh
 * Use output file to retrive result.
