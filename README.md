@@ -131,3 +131,11 @@ Our group aims at doing research for using deep learning method to make a recomm
 * run: sbatch submit.sh
 * Use output file to retrive result.
 
+
+4. LightFM: all data
+
+epochs= 50, num_threads= 4
+
+Train AUC Score:: 0.9694958
+Test AUC Score: 0.9507404
+
