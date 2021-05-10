@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import pandas as pd
 import keras
@@ -14,7 +15,7 @@ from math import sqrt
 np.random.seed(123)
 # load data
 def loadData():
-    ratings = pd.read_csv('./data/rating_cut.csv', parse_dates=['timestamp'])
+    ratings = pd.read_csv('./data/rating.csv', parse_dates=['timestamp'])
     return ratings
 
 # for test convenience, only use num% of data
@@ -89,13 +90,18 @@ def predict(model, test_ratings):
 def rmse(prediction, ground_truth):
     return sqrt(mean_squared_error(prediction, ground_truth))
 
+start = time.time()
 ratings = loadData()
+#ratings_cut = cutData(0.3, ratings)
 train_ratings, test_ratings = splitData(ratings)
 nn_model = embeddingNNModel(ratings)
-batch_size = 128
-epochs = 5
+batch_size = 512
+epochs = 10
 new_model = fit(nn_model, train_ratings, epochs, batch_size)
 pre_ratings = predict(new_model, test_ratings)
 RMSE = rmse(pre_ratings, test_ratings.rating)
-print (f'Neural Network RMSE is: {RMSE}')
+print (f'Batch_size is: {batch_size}, epochs is: {epochs}, Neural Network RMSE is: {RMSE}')
+end = time.time()
+print(f"Runtime of the program is {end - start}")
+
 
