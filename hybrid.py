@@ -74,7 +74,6 @@ def findSimilar(tfidf_matrix, movies_ratings):
 def cbSuggest(item_id, amount, results, movies_ratings):
     rating_sum = 0
     recs = results[item_id]
-    count = amount
     for rec in recs:
         if rec[1]!=item_id:
             index = movies_ratings[movies_ratings['movieId'] == rec[1]].index
@@ -83,12 +82,12 @@ def cbSuggest(item_id, amount, results, movies_ratings):
             amount -= 1
         if amount <= 0:
             break
-    return rating_sum/count
+    return rating_sum/5
 
-def cbPredict(test_ratings_ori, results, movies_ratings, num):
+def cbPredict(test_ratings_ori, results, movies_ratings):
     cb_pre_ratings = []
     for index, row in test_ratings_ori.iterrows():
-        pre_rateing = cbSuggest(row['movieId'], num, results, movies_ratings)
+        pre_rateing = cbSuggest(row['movieId'], 5, results, movies_ratings)
         cb_pre_ratings.append(pre_rateing)
     cb_pre_ratings = np.asarray(cb_pre_ratings)
     cb_pre_ratings_reshape = np.reshape(cb_pre_ratings, (cb_pre_ratings.shape[0], 1))
@@ -125,8 +124,12 @@ def cfPredict(model, test_ratings):
     pre_ratings = model.predict([test_ratings.userId,test_ratings.movieId])
     return pre_ratings
 
-def finalPredict(cbPre, cfPre, cbNum, cfNum):
-    finalPre = cbNum * cbPre + cfNum * cfPre
+def finalPredict1(cbPre, cfPre):
+    finalPre = 0.25 * cbPre + 0.75 * cfPre
+    return finalPre
+
+def finalPredict2(cbPre, cfPre):
+    finalPre = 0.1 * cbPre + 0.9 * cfPre
     return finalPre
 
 def rmse(prediction, ground_truth):
@@ -134,32 +137,23 @@ def rmse(prediction, ground_truth):
 
 start = time.time()
 ratings, movies_ratings = loadData()
-#ratings_cut = cutData(0.01, ratings)
+#ratings_cut = cutData(0.3, ratings)
 train_ratings, test_ratings, train_ratings_ori, test_ratings_ori = splitData(ratings)
 tfidf_matrix = findTfidfMatrix(movies_ratings)
 results = findSimilar(tfidf_matrix, movies_ratings)
-
+cb_pre_ratings = cbPredict(test_ratings_ori, results, movies_ratings)
 nn_model = embeddingNNModel(ratings)
 batch_size = 512
 epochs = 10
 new_model = cfFit(nn_model, train_ratings, epochs, batch_size)
 cf_pre_ratings = cfPredict(new_model, test_ratings)
-
-nums = [2, 5, 10]
-cbNums = [0.05, 0.1, 0.2]
-cfNums = [0.95, 0.9, 0.8]
-for num in nums:
-    for i in range(len(cbNums)):
-        cb_pre_ratings = cbPredict(test_ratings_ori, results, movies_ratings, num)
-        final_pre_ratings = finalPredict(cb_pre_ratings, cf_pre_ratings, cbNums[i], cfNums[i])
-
-        RMSE = rmse(cf_pre_ratings, test_ratings.rating)
-        RMSE1 = rmse(final_pre_ratings, test_ratings.rating)
-
-        print (f'Batch_size is: {batch_size}, epochs is: {epochs}, Neural Network RMSE is: {RMSE}')
-        print (f'movies_ave_num is {num}, cbPre is {cbNums[i]}, cfPre is {cfNums[i]},  Hybrid RMSE is: {RMSE1}')
-
+final_pre_ratings1 = finalPredict1(cb_pre_ratings, cf_pre_ratings)
+final_pre_ratings2 = finalPredict2(cb_pre_ratings, cf_pre_ratings)
+RMSE = rmse(cf_pre_ratings, test_ratings.rating)
+RMSE1 = rmse(final_pre_ratings1, test_ratings.rating)
+RMSE2 = rmse(final_pre_ratings2, test_ratings.rating)
+print (f'Batch_size is: {batch_size}, epochs is: {epochs}, Neural Network RMSE is: {RMSE}')
+print (f'cbPre is 0.25, cfPre is 0.75,  Hybrid RMSE is: {RMSE1}')
+print (f'cbPre is 0.1, cfPre is 0.9,  Hybrid RMSE is: {RMSE2}')
 end = time.time()
 print(f"Runtime of the program is {end - start}")
-
-
