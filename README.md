@@ -93,34 +93,33 @@ Our group aims at doing research for using deep learning method to make a recomm
 *Experiemnts*
 1. Collaborative filtering: turning parameters with 30% data
 
-| Number | Batch_size  | Epochs | RMSE |  Runtime | output.log
+| Number | Batch_size  | Epochs | RMSE |  Runtime | Output
 |--------|-------------|--------|------|----------|--|
 |1|32|5|-|More than 4 hours||
-|2|128|5|0.8376757057764654|02:12:45|[output_2.log]
-|3|512|10|0.8173020977949738|01:15:39|[output_3.log]
-|4|128|10|0.8146115762344519|02:45:02|[output_4.log]
+|2|128|5|0.8376757057764654|02:12:45|[output_2](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/output/output_2.png)
+|3|512|10|0.8173020977949738|01:15:39|[output_3](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/output/output_3.png)
+|4|128|10|0.8146115762344519|02:45:02|[output_4](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/output/output_4.png)
 
 2. Collaborative filtering: all data
 
- Batch_size  | Epochs | RMSE |  Runtime | output.log
+ Batch_size  | Epochs | RMSE |  Runtime | Output
 -------------|--------|------|----------|--|
-512|10|0.9760667964050797|07:13:56|[output_5.log]
+512|10|0.9760667964050797|07:13:56|[output_5](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/output/output_5.png)
 
 3. Hybrid Recommender System: all data
 
- Batch_size  | Epochs | Num of movies | Percentage of CB | Percentage of CF | RMSE |  Runtime | output.log
+ Batch_size  | Epochs | Num of movies | Percentage of CB | Percentage of CF | RMSE |  Runtime | Output
 -------------|--------|------|----------|--|--|--|--|
-(Base Line)512|10|-|-|-
-512|10|2|5%|95%
-512|10|2|10%|90%
-512|10|2|20%|80%
-512|10|5|5%|95%
-512|10|5|10%|90%
-512|10|5|20%|80%
-512|10|10|5%|95%
-512|10|10|10%|90%
-512|10|10|20%|80%
+(Base Line)512|10|-|0|100%|0.8098864027483295|11:49:06|[hybrid_2](https://github.com/Charliewei6/cmpe255-team3-project/blob/main/output/hybrid_2.png)
+512|10|5|10%|90%|0.817477271184282|
+512|10|5|25%|75%|0.8423216447352478|
 
+4. LightFM: all data
+
+* epochs= 50, num_threads= 4
+
+* Train AUC Score: 0.9694958
+* Test AUC Score: 0.9507404
 
 ### How to run program in local?
 * python fileName
@@ -130,12 +129,3 @@ Our group aims at doing research for using deep learning method to make a recomm
 * In submit script, change job-name, output, error, time, load module, and file path if necessary.
 * run: sbatch submit.sh
 * Use output file to retrive result.
-
-
-4. LightFM: all data
-
-epochs= 50, num_threads= 4
-
-Train AUC Score:: 0.9694958
-Test AUC Score: 0.9507404
-
