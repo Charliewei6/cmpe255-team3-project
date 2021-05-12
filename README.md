@@ -10,6 +10,15 @@ MovieLens 20M Dataset<br/>
 Over 20 Million Movie Ratings and Tagging Activities Since 1995<br/>
 https://www.kaggle.com/grouplens/movielens-20m-dataset/download
 
+## Setup before running
+1. Download our cmpe255-team3-project file to local
+2. Download the data zip file from the above link
+3. Unzip the data zip file, you will get an 'archive' folder, containing six csv files.
+4. Move the 'archive' folder to the cmpe-255-team3-project/.
+5. Make sure 'archive' folder on the same depth as other py files.
+6. Prepare and install all the related packages
+7. Now, you should be ready to run our codes, for example: python app_yiru.py
+
 ## Goal
 Our group aims at doing research for using deep learning method to make a recommender system by traing MovieLens datasets. Each of our team members focus on digging into a particular deep learning recommender system from Kaggle, optimizing it, testing it, and comparing the new result to the original one.
 
